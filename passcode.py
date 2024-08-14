@@ -1,9 +1,15 @@
 import itertools
-cond1 = [6, 8, 2] # 1 number correct and well placed
-cond2 = [6, 1, 4] # 1 number wrongly placed
-cond3 = [2, 0, 6] # 2 numbers wrongly placed
-cond4 = [7, 3, 8] # nothing is correct
-cond5 = [7, 8, 0] # 1 number wrongly placed
+# hint1 = [6, 8, 2] # 1 number correct and well placed
+# hint2 = [6, 1, 4] # 1 number wrongly placed
+# hint3 = [2, 0, 6] # 2 numbers wrongly placed
+# hint4 = [7, 3, 8] # nothing is correct
+# hint5 = [7, 8, 0] # 1 number wrongly placed
+
+hint1 = [3, 4, 2] # 1 number correct and well placed
+hint2 = [1, 4, 6] # 1 number wrongly placed
+hint3 = [8, 7, 6] # 2 numbers wrongly placed
+hint4 = [4, 7, 3] # nothing is correct
+hint5 = [0, 6, 9] # 1 number wrongly placed
 
 def main():
     permutations = [list(permu) for permu in itertools.permutations(list(range(10)), 3)]
@@ -12,8 +18,8 @@ def main():
 
     purge_cond1(correct_number, correct_index, permutations) # purging incorrect numbers in cond1
     print('Number of possible permutations after applying condition 1:',len(permutations))
-    
-    wrongly_placed_list = [[cond2, 1], [cond3, 2], (cond4, 0), (cond5, 1)]
+
+    wrongly_placed_list = [[hint2, 1], [hint3, 2], (hint4, 0), (hint5, 1)]
     i = 2
     for cond, quantity in wrongly_placed_list:
         test_wrongly_placed(permutations, cond, quantity)
@@ -28,11 +34,11 @@ def main():
 
 def test_well_placed():
     for i in range(3):
-        others_numbers = set([cond2[i], cond3[i], cond5[i]] + cond4)
-        if cond1[i] in others_numbers:
+        others_numbers = set([hint2[i], hint3[i], hint5[i]] + hint4)
+        if hint1[i] in others_numbers:
             pass
         else:
-            correct_number, correct_index = cond1[i], i
+            correct_number, correct_index = hint1[i], i
     return correct_number, correct_index
 
 def purge_cond1(correct_number, correct_index, permutations):
